@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="SignaturePadTest.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SignaturePadTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <local:ViewModel x:Key="ViewModel"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource AppBarItemPointerOverBackgroundThemeBrush}">
+        <Canvas x:Name="MyCanvas" HorizontalAlignment="Left" Height="600" Margin="20,0,0,0" VerticalAlignment="Center" Width="1000" Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                PointerPressed="Canvas_PointerPressed"
+                PointerReleased="Canvas_PointerReleased"
+                PointerMoved="Canvas_PointerMoved"
+                />
+        <Canvas x:Name="Canvas_1" HorizontalAlignment="Left" Height="100" Margin="1041,84,0,0" VerticalAlignment="Top" Width="200" Background="{ThemeResource AppBarBackgroundThemeBrush}"/>
+        <Canvas x:Name="Canvas_2" HorizontalAlignment="Left" Height="40" Margin="1041,207,0,0" VerticalAlignment="Top" Width="150" Background="{ThemeResource AppBarBackgroundThemeBrush}"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="80,697,0,0" VerticalAlignment="Top" Background="{ThemeResource AppBarBackgroundThemeBrush}" Click="Clear_Click"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="143,697,0,0" VerticalAlignment="Top" Background="{ThemeResource AppBarBackgroundThemeBrush}" Click="Save_Click"/>
+        <Button Content="Load" HorizontalAlignment="Left" Margin="203,697,0,0" VerticalAlignment="Top" Background="{ThemeResource AppBarBackgroundThemeBrush}" Click="Load_Click"/>
+    </Grid>
+</Page>

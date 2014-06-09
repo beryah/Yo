@@ -1,0 +1,38 @@
+﻿<Page xmlns:Map="using:Telerik.UI.Xaml.Controls.Map"  
+    x:Class="MapTest.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Map:RadMap Grid.Row="1">
+            <Map:RadMap.Layers>
+                <Map:MapShapeLayer ShapeToolTipAttributeName="ADMIN_NAME"
+                                   >
+                    <Map:MapShapeLayer.Source>
+                        <Map:ShapefileDataSource SourceUriString="ms-appx:///Data/asia.shp"
+                                                 DataSourceUriString="ms-appx:///Data/asia.dbf"/>
+                    </Map:MapShapeLayer.Source>
+                    <Map:MapShapeLayer.ShapeColorizer>
+                        <Map:DesaturationColorizer BaseColor="#FFBD2E" AttributeName="SQKM_ADMIN" From="1" To="0" RangeCount="10">
+                            <Map:DesaturationColorizer.RangeDistribution>
+                                <Map:LogarithmicRangeDistribution/>
+                            </Map:DesaturationColorizer.RangeDistribution>
+                        </Map:DesaturationColorizer>
+                    </Map:MapShapeLayer.ShapeColorizer>
+                </Map:MapShapeLayer>
+            </Map:RadMap.Layers>
+            <Map:RadMap.Behaviors>
+                <Map:MapPanAndZoomBehavior/>
+                <Map:MapShapeToolTipBehavior/>
+                <Map:MapShapeSelectionBehavior/>
+                <Map:MapShapePointerOverBehavior/>
+            </Map:RadMap.Behaviors>
+        </Map:RadMap>
+
+    </Grid>
+</Page>
