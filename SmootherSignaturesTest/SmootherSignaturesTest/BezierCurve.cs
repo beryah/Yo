@@ -29,11 +29,11 @@ namespace SmootherSignaturesTest
             {
                 var steps = 10d;
                 var length = 0d;
-                var p = new BezierCurvePoint() { X = 0, Y = 0 };
+                var p = new BezierCurvePoint();
 
                 for (int i = 0; i < steps; i++)
                 {
-                    var t = 1 / steps;
+                    var t = i / steps;
                     var c = this.GetPoint(t);
 
                     if (i > 0)
@@ -47,7 +47,7 @@ namespace SmootherSignaturesTest
                     p = c;
                 }
 
-                return 100;
+                return length;
             }
         }
 
@@ -60,11 +60,9 @@ namespace SmootherSignaturesTest
             var uu = u * u;
             var uuu = uu * u;
 
-            return new BezierCurvePoint()
-            {
-                X = this.StartPoint.X * uuu + 3 * this.ControlPoint1.X * uu * t + 3 * this.ControlPoint2.X * u * tt + this.EndPoint.X * ttt,
-                Y = this.StartPoint.Y * uuu + 3 * this.ControlPoint1.Y * uu * t + 3 * this.ControlPoint2.Y * u * tt + this.EndPoint.Y * ttt,
-            };
+            var x = this.StartPoint.X * uuu + 3 * this.ControlPoint1.X * uu * t + 3 * this.ControlPoint2.X * u * tt + this.EndPoint.X * ttt;
+            var y = this.StartPoint.Y * uuu + 3 * this.ControlPoint1.Y * uu * t + 3 * this.ControlPoint2.Y * u * tt + this.EndPoint.Y * ttt;
+            return new BezierCurvePoint(x, y);
         }
     }
 }

@@ -8,22 +8,22 @@ namespace SmootherSignaturesTest
 {
     public class BezierCurvePoint
     {
-        public BezierCurvePoint()
+        public BezierCurvePoint(double x = 0, double y = 0)
         {
+            this.X = x;
+            this.Y = y;
             this.Time = DateTime.Now;
         }
 
-        public double X { get; set; }
+        public double X { get; private set; }
 
-        public double Y { get; set; }
+        public double Y { get; private set; }
 
         public DateTime Time { get; set; }
 
-        public double Size { get; set; }
-
         public double VelocityFrom(BezierCurvePoint start)
         {
-            return this.Time != start.Time ? this.DistanceTo(start) / (this.Time - start.Time).Seconds : 1;
+            return this.Time != start.Time ? this.DistanceTo(start) / (this.Time - start.Time).Milliseconds : 0;
         }
 
         private double DistanceTo(BezierCurvePoint point)

@@ -26,8 +26,8 @@ namespace SmootherSignaturesTest
     public sealed partial class MainPage : Page
     {
         private readonly double velocityFilterWeight = 0.7;
-        private readonly double maximumWidth = 2.5;
-        private readonly double minimumWidth = 0.5;
+        private readonly double maximumWidth = 10;
+        private readonly double minimumWidth = 2;
         private readonly SolidColorBrush penColor = new SolidColorBrush(Colors.Black);
 
         public MainPage()
@@ -100,11 +100,7 @@ namespace SmootherSignaturesTest
 
         private BezierCurvePoint CreatePoint(PointerPoint pointerPoint)
         {
-            return new BezierCurvePoint()
-            {
-                X = pointerPoint.Position.X,
-                Y = pointerPoint.Position.Y,
-            };
+            return new BezierCurvePoint(pointerPoint.Position.X, pointerPoint.Position.Y);
         }
 
         private void AddPoint(BezierCurvePoint point)
@@ -138,8 +134,8 @@ namespace SmootherSignaturesTest
             var dx2 = points[1].X - points[2].X;
             var dy2 = points[1].Y - points[2].Y;
 
-            var m1 = new BezierCurvePoint() { X = (points[0].X + points[1].X) / 2, Y = (points[0].Y + points[1].Y) / 2, };
-            var m2 = new BezierCurvePoint() { X = (points[1].X + points[2].X) / 2, Y = (points[1].Y + points[2].Y) / 2, };
+            var m1 = new BezierCurvePoint((points[0].X + points[1].X) / 2, (points[0].Y + points[1].Y) / 2);
+            var m2 = new BezierCurvePoint((points[1].X + points[2].X) / 2, (points[1].Y + points[2].Y) / 2);
 
             var l1 = Math.Sqrt(dx1 * dx1 + dy1 * dy1);
             var l2 = Math.Sqrt(dx2 * dx2 + dy2 * dy2);
@@ -148,15 +144,15 @@ namespace SmootherSignaturesTest
             var dym = m1.Y - m2.Y;
 
             var k = l2 / (l1 + l2);
-            var cm = new BezierCurvePoint() { X = m2.X + dxm * k, Y = m2.Y + dym * k, };
+            var cm = new BezierCurvePoint(m2.X + dxm * k, m2.Y + dym * k);
 
             var tx = points[1].X - cm.X;
             var ty = points[1].Y - cm.Y;
 
             return new List<BezierCurvePoint>()
             {
-                new BezierCurvePoint(){ X = m1.X + tx, Y = m1.Y + ty, },
-                new BezierCurvePoint(){ X = m2.X + tx, Y = m2.Y + ty, },
+                new BezierCurvePoint(m1.X + tx, m1.Y + ty),
+                new BezierCurvePoint(m2.X + tx, m2.Y + ty),
             };
         }
 
@@ -180,7 +176,7 @@ namespace SmootherSignaturesTest
 
             for (int i = 0; i < drawSteps; i++)
             {
-                var t = 1 / drawSteps;
+                var t = i / drawSteps;
                 var tt = t * t;
                 var ttt = tt * t;
 
@@ -188,11 +184,9 @@ namespace SmootherSignaturesTest
                 var uu = u * u;
                 var uuu = uu * u;
 
-                var point = new BezierCurvePoint()
-                {
-                    X = curve.StartPoint.X * uuu + 3 * curve.ControlPoint1.X * uu * t + 3 * curve.ControlPoint2.X * u * tt + curve.EndPoint.X * ttt,
-                    Y = curve.StartPoint.Y * uuu + 3 * curve.ControlPoint1.Y * uu * t + 3 * curve.ControlPoint2.Y * u * tt + curve.EndPoint.Y * ttt,
-                };
+                var x = curve.StartPoint.X * uuu + 3 * curve.ControlPoint1.X * uu * t + 3 * curve.ControlPoint2.X * u * tt + curve.EndPoint.X * ttt;
+                var y = curve.StartPoint.Y * uuu + 3 * curve.ControlPoint1.Y * uu * t + 3 * curve.ControlPoint2.Y * u * tt + curve.EndPoint.Y * ttt;
+                var point = new BezierCurvePoint(x, y);
 
                 var width = startWidth + ttt * widthDelta;
 
