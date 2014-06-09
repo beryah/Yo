@@ -1,0 +1,10 @@
+﻿<Application
+    x:Class="TelerikTest.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TelerikTest" RequestedTheme="Light">
+    <Application.Resources>
+        <SolidColorBrush x:Key="Brush1" Color="#B3B6B6B6"/>
+    </Application.Resources>
+
+</Application>
