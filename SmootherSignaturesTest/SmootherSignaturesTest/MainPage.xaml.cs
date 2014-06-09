@@ -5,6 +5,10 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Input;
 using Windows.UI.Xaml;
@@ -13,6 +17,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
@@ -65,6 +70,41 @@ namespace SmootherSignaturesTest
             this.PointerId = null;
             this.StrokeEnd();
         }
+
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            this.MyCanvas.Children.Clear();
+        }
+
+        private async void Save_Click(object sender, RoutedEventArgs e)
+        {
+            var renderTargetBitmap = new RenderTargetBitmap();
+            await renderTargetBitmap.RenderAsync(this.MyCanvas);
+
+            var picker = new FileSavePicker();
+            picker.FileTypeChoices.Add("PNG Image", new string[] { ".png" });
+            var file = await picker.PickSaveFileAsync();
+            if (file != null)
+            {
+                var pixels = await renderTargetBitmap.GetPixelsAsync();
+
+                using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                {
+                    var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+                    var bytes = pixels.ToArray();
+                    //var a = Convert.ToBase64String(bytes);
+                    //var b = Convert.FromBase64String(a);
+                    encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                                         BitmapAlphaMode.Premultiplied,
+                                         (uint)this.MyCanvas.ActualWidth, (uint)this.MyCanvas.ActualHeight,
+                                         96, 96, bytes);
+
+                    await encoder.FlushAsync();
+                }
+            }
+        }
+
+        #region Stroke Control
 
         private void StrokeUpdate(PointerPoint pointerPoint)
         {
@@ -208,5 +248,7 @@ namespace SmootherSignaturesTest
                     Margin = new Thickness(point.X, point.Y, 0, 0),
                 });
         }
+
+        #endregion
     }
 }

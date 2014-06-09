@@ -7,7 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource AppBarItemPointerOverBackgroundThemeBrush}">
-        <Canvas x:Name="MyCanvas" Background="{ThemeResource AppBarItemPressedForegroundThemeBrush}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="1000" Height="600" Margin="20,0,0,0" PointerPressed="MyCanvas_PointerPressed" PointerReleased="MyCanvas_PointerReleased" PointerMoved="MyCanvas_PointerMoved"/>
+    <Grid Background="#FFE1E1E1">
+        <Grid Background="White" Width="1300" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Canvas x:Name="MyCanvas" Background="Transparent" PointerPressed="MyCanvas_PointerPressed" PointerReleased="MyCanvas_PointerReleased" PointerMoved="MyCanvas_PointerMoved"/>
+        </Grid>
+        <Button Content="Clear" FontSize="25" Height="50" Margin="30,660,0,58" Width="100" Click="Clear_Click"/>
+        <Button Content="Save" FontSize="25" Height="50" Margin="129,660,0,58" Width="100" Click="Save_Click"/>
     </Grid>
 </Page>
