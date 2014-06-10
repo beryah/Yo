@@ -1,0 +1,42 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CartesianChartSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Chart="using:Telerik.UI.Xaml.Controls.Chart"
+    x:Class="CartesianChartSample.MainPage"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Chart:RadCartesianChart x:Name="MyCartesianChart"
+                                 HorizontalAlignment="Left" VerticalAlignment="Top"
+                                 Height="500" Width="800" Margin="125,130,0,0">
+            <Chart:RadCartesianChart.VerticalAxis>
+                <Chart:LinearAxis/>
+            </Chart:RadCartesianChart.VerticalAxis>
+            <Chart:RadCartesianChart.HorizontalAxis>
+                <Chart:CategoricalAxis/>
+            </Chart:RadCartesianChart.HorizontalAxis>
+            <Chart:BarSeries ShowLabels="True">
+                <Chart:BarSeries.ValueBinding>
+                    <Chart:PropertyNameDataPointBinding PropertyName="Value"/>
+                </Chart:BarSeries.ValueBinding>
+                <Chart:BarSeries.CategoryBinding>
+                    <Chart:PropertyNameDataPointBinding PropertyName="Category"/>
+                </Chart:BarSeries.CategoryBinding>
+                <Chart:BarSeries.LabelDefinitions>
+                    <Chart:ChartSeriesLabelDefinition VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <Chart:ChartSeriesLabelDefinition.Template>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DataItem.Label}" FontSize="20" Foreground="Black"/>
+                            </DataTemplate>
+                        </Chart:ChartSeriesLabelDefinition.Template>
+                    </Chart:ChartSeriesLabelDefinition>
+                </Chart:BarSeries.LabelDefinitions>
+            </Chart:BarSeries>
+        </Chart:RadCartesianChart>
+
+    </Grid>
+</Page>
