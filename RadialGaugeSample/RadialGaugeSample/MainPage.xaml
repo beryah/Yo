@@ -1,0 +1,29 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RadialGaugeSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:DataVisualization="using:Telerik.UI.Xaml.Controls.DataVisualization"
+    x:Class="RadialGaugeSample.MainPage"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <DataVisualization:RadRadialGauge HorizontalAlignment="Center" VerticalAlignment="Center"
+                                          Height="200" Width="200" TickStep="10"
+                                          MinValue="0" MaxValue="150"
+                                          MinAngle="-30" MaxAngle="210">
+            <DataVisualization:RadRadialGauge.LabelTemplate>
+                <DataTemplate/>
+            </DataVisualization:RadRadialGauge.LabelTemplate>
+            <DataVisualization:SegmentedRadialGaugeIndicator Value="150">
+                <DataVisualization:BarIndicatorSegment Stroke="Red" Thickness="30" Length="60"/>
+                <DataVisualization:BarIndicatorSegment Stroke="Yellow" Thickness="30" Length="30"/>
+                <DataVisualization:BarIndicatorSegment Stroke="LightGreen" Thickness="30" Length="60"/>
+            </DataVisualization:SegmentedRadialGaugeIndicator>
+            <DataVisualization:ArrowGaugeIndicator Value="107" Brush="Black" Thickness="5"/>
+        </DataVisualization:RadRadialGauge>
+
+    </Grid>
+</Page>
