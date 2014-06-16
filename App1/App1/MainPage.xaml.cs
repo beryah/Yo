@@ -104,9 +104,9 @@ namespace App1
             this.AngleRange = new AngleRange(startAngle, 360);
         }
 
-        public List<Node> ItemsSource { get; set; }
+        public List<Node> ItemsSource { get; private set; }
 
-        public AngleRange AngleRange { get; set; }
+        public AngleRange AngleRange { get; private set; }
     }
 
 
