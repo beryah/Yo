@@ -26,6 +26,16 @@
                 <TextBlock Text="{Binding TextB}"/>
             </StackPanel>
         </ControlTemplate>
+        <ControlTemplate x:Key="ttgg">
+            <Grid Margin="5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding TextA}"/>
+                <TextBlock Grid.Row="1" Text="{Binding TextB}"/>
+            </Grid>
+        </ControlTemplate>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -61,14 +71,46 @@
                     <ContentControl Template="{StaticResource Template}" DataContext="{Binding Model}"/>
                 </Button.Content>
             </Button>
-            <ListView Width="300" Height="300" ItemsSource="{Binding Models}">
+            <ListView Width="Auto" Height="Auto" ItemsSource="{Binding Models}" SelectionMode="None">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding ModelText}" VerticalAlignment="Center" Width="70"/>
-                            <ContentControl Template="{StaticResource ControlTemplate}" DataContext="{Binding ModelA}"/>
-                            <ContentControl Template="{StaticResource ControlTemplate}" DataContext="{Binding ModelB}"/>
-                            <ContentControl Template="{StaticResource ControlTemplate}" DataContext="{Binding ModelC}"/>
+                            <TextBlock Text="{Binding ModelText}" VerticalAlignment="Center" Margin="5,0"/>
+                            <ContentControl>
+                                <ContentControl.ContentTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="5,0" DataContext="{Binding ModelA}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Text="{Binding TextA}"/>
+                                            <TextBlock Grid.Row="1" Text="{Binding TextB}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ContentControl.ContentTemplate>
+                            </ContentControl>
+                            <ContentControl>
+                                <ContentControl.ContentTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="5,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Text="{Binding ModelB.TextA}"/>
+                                            <TextBlock Grid.Row="1" Text="{Binding ModelB.TextB}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ContentControl.ContentTemplate>
+                            </ContentControl>
+                            <ContentControl>
+                                <ContentControl.ContentTemplate>
+                                    <DataTemplate>
+                                        <ContentControl Template="{StaticResource ttgg}" DataContext="{Binding ModelC}"/>
+                                    </DataTemplate>
+                                </ContentControl.ContentTemplate>
+                            </ContentControl>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
