@@ -26,21 +26,6 @@ namespace App1
         {
             this.InitializeComponent();
 
-            var paletteEntryCollection = new PaletteEntryCollection();
-            paletteEntryCollection.Brushes.AddRange(
-                new List<SolidColorBrush>()
-                {
-                    new SolidColorBrush(Color.FromArgb(255, 198, 214, 165)),
-                    new SolidColorBrush(Color.FromArgb(255, 206, 206, 198)),
-                });
-
-            this.pie.Palette = new ChartPalette()
-            {
-                Name = "CustomPalette",
-                FillEntries = paletteEntryCollection,
-                StrokeEntries = paletteEntryCollection,
-            };
-
             var data = new PieData(30);
             this.pie.DataContext = data;
         }
@@ -53,15 +38,14 @@ namespace App1
             {
                 this.pie.DataContext = new PieData(amt);
             }
+
+            var a = this.grid;
         }
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
             var renderTargetBitmap = new RenderTargetBitmap();
             await renderTargetBitmap.RenderAsync(this.cvs);
-
-            var a = this.pie.MinHeight;
-            var b = this.pie.MinWidth;
 
             var picker = new FileSavePicker();
             picker.FileTypeChoices.Add("PNG Image", new string[] { ".png" });
@@ -78,10 +62,6 @@ namespace App1
                                          BitmapAlphaMode.Premultiplied,
                                          (uint)this.cvs.ActualWidth, (uint)this.cvs.ActualHeight,
                                          96, 96, bytes);
-
-                    //var bitmapImage = new BitmapImage();
-                    //await bitmapImage.SetSourceAsync(stream);
-                    //this.img.Source = bitmapImage;
 
                     await encoder.FlushAsync();
                 }
@@ -108,7 +88,6 @@ namespace App1
 
         public AngleRange AngleRange { get; private set; }
     }
-
 
     public class Node
     {
