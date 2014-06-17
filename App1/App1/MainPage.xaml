@@ -7,18 +7,30 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <Chart:PaletteEntryCollection x:Key="CustomPaletteEntryCollection">
             <SolidColorBrush Color="#FFC6D6A5"/>
             <SolidColorBrush Color="#FFCECEC6"/>
         </Chart:PaletteEntryCollection>
         <Chart:ChartPalette x:Key="CustomChartPalette" Name="CustomChartPalette" FillEntries="{StaticResource CustomPaletteEntryCollection}" StrokeEntries="{StaticResource CustomPaletteEntryCollection}"/>
+        <local:ViewModel x:Key="ViewModel"/>
+        <ControlTemplate x:Key="Template">
+            <Grid>
+                <TextBlock Text="{Binding ModelText}" FontSize="20"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ControlTemplate">
+            <StackPanel Orientation="Vertical" Width="35">
+                <TextBlock Text="{Binding TextA}"/>
+                <TextBlock Text="{Binding TextB}"/>
+            </StackPanel>
+        </ControlTemplate>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <Canvas x:Name="cvs" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="300" Background="Transparent">
+        <Canvas x:Name="cvs" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="300" Background="Transparent" Margin="10,458,1056,10">
 
             <Chart:RadPieChart x:Name="pie" Palette="{StaticResource CustomChartPalette}" ClipToBounds="False" Width="100" Height="100" Canvas.Left="30" Canvas.Top="20" MinWidth="30" MinHeight="30">
                 <Chart:PieSeries ShowLabels="False" AngleRange="{Binding AngleRange}" ItemsSource="{Binding ItemsSource}">
@@ -33,11 +45,35 @@
 
         </Canvas>
 
-        <Grid x:Name="grid" Height="200" Width="200" Margin="960,325,206,243" Background="#FFC6D6A5">
+        <Grid x:Name="grid" Height="200" Width="200" Margin="335,558,831,10" Background="#FFC6D6A5">
             <TextBox x:Name="text" Text="20" Height="20" Margin="14,53,37,115"/>
             <Button Content="Draw" Click="Button_Click" Margin="7,87,0,69" Height="44" Width="80"/>
             <Button Content="Save" Click="Save_Click" Margin="86,87,0,69" Height="44" Width="80"/>
         </Grid>
+
+        <StackPanel Width="700" Height="600" Margin="600,90,66,78" Background="AliceBlue" DataContext="{StaticResource ViewModel}">
+            <TextBlock Text="{Binding Text}" FontSize="20"/>
+            <Grid DataContext="{Binding Model}">
+                <TextBlock Text="{Binding ModelText}" FontSize="20"/>
+            </Grid>
+            <Button Width="600" Height="60">
+                <Button.Content>
+                    <ContentControl Template="{StaticResource Template}" DataContext="{Binding Model}"/>
+                </Button.Content>
+            </Button>
+            <ListView Width="300" Height="300" ItemsSource="{Binding Models}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding ModelText}" VerticalAlignment="Center" Width="70"/>
+                            <ContentControl Template="{StaticResource ControlTemplate}" DataContext="{Binding ModelA}"/>
+                            <ContentControl Template="{StaticResource ControlTemplate}" DataContext="{Binding ModelB}"/>
+                            <ContentControl Template="{StaticResource ControlTemplate}" DataContext="{Binding ModelC}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListView>
+        </StackPanel>
 
         <Image HorizontalAlignment="Left" Height="100" Margin="335,90,0,0" VerticalAlignment="Top" Width="100"
                x:Name="img"/>
