@@ -96,9 +96,27 @@ namespace App1
             {
                 return new List<Model>()
                 {
-                    new Model(){ModelText="Model_1", ModelA = new ModelInModel(){TextA="1AA", TextB="1AB"}, ModelB = new ModelInModel(){TextA="1BA", TextB="1BB"}, ModelC = new ModelInModel(){TextA="1CA", TextB="1CB"}},
-                    new Model(){ModelText="Model_2", ModelA = new ModelInModel(){TextA="2AA", TextB="2AB"}, ModelB = new ModelInModel(){TextA="2BA", TextB="2BB"}, ModelC = new ModelInModel(){TextA="3CA", TextB="3CB"}},
-                    new Model(){ModelText="Model_3", ModelA = new ModelInModel(){TextA="3AA", TextB="3AB"}, ModelB = new ModelInModel(){TextA="2BA", TextB="2BB"}, ModelC = new ModelInModel(){TextA="3CA", TextB="3CB"}},
+                    new Model()
+                    {
+                        ModelText="Model_1",
+                        ModelA = new ModelInModel() { TextA = "1AA", TextB = "1AB", },
+                        ModelB = new ModelInModel() { TextA = "1BA", TextB = "1BB", },
+                        ModelC = new ModelInModel() { TextA = "1CA", TextB = "1CB", },
+                    },
+                    new Model()
+                    {
+                        ModelText="Model_2",
+                        ModelA = new ModelInModel() { TextA = "2AA", TextB = "2AB", },
+                        ModelB = new ModelInModel() { TextA = "2BA", TextB = "2BB", },
+                        ModelC = new ModelInModel() { TextA = "3CA", TextB = "3CB", },
+                    },
+                    new Model()
+                    {
+                        ModelText="Model_3",
+                        ModelA = new ModelInModel() { TextA = "3AA", TextB = "3AB", },
+                        ModelB = new ModelInModel() { TextA = "2BA", TextB = "2BB", },
+                        ModelC = new ModelInModel() { TextA = "3CA", TextB = "3CB", },
+                    },
                 };
             }
         }
