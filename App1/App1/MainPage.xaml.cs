@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Telerik.Charting;
 using Telerik.UI.Xaml.Controls.Chart;
 using Windows.Graphics.Imaging;
@@ -47,105 +48,61 @@ namespace App1
         {
             var renderTargetBitmap = new RenderTargetBitmap();
             await renderTargetBitmap.RenderAsync(this.cvs);
+            var bytes = (await renderTargetBitmap.GetPixelsAsync()).ToArray();
 
             var picker = new FileSavePicker();
             picker.FileTypeChoices.Add("PNG Image", new string[] { ".png" });
+
             var file = await picker.PickSaveFileAsync();
             if (file != null)
             {
-                var pixels = await renderTargetBitmap.GetPixelsAsync();
-
                 using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {
                     var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
-                    var bytes = pixels.ToArray();
                     encoder.SetPixelData(BitmapPixelFormat.Bgra8,
                                          BitmapAlphaMode.Premultiplied,
                                          (uint)this.cvs.ActualWidth, (uint)this.cvs.ActualHeight,
                                          96, 96, bytes);
 
                     await encoder.FlushAsync();
+
+                    var bitmapImage = new BitmapImage(new Uri(@"C:\Users\Ejun\Pictures\XXX.png"));
+                    //bitmapImage.SetSource(stream);
+
+                    this.img.Source = bitmapImage;
                 }
             }
-        }
-    }
 
-    public class ViewModel : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public string Text
-        {
-            get
-            {
-                return "Hello!!";
-            }
+            //await this.SetImageFromByteArray(bytes, this.img);
         }
 
-        public Model Model
+        public async Task SetImageFromByteArray(byte[] data, Windows.UI.Xaml.Controls.Image image)
         {
-            get
+            using (InMemoryRandomAccessStream raStream = new InMemoryRandomAccessStream())
             {
-                return new Model() { ModelText = "YYYYY" };
-            }
-        }
-
-        public List<Model> Models
-        {
-            get
-            {
-                return new List<Model>()
+                using (DataWriter writer = new DataWriter(raStream))
                 {
-                    new Model()
-                    {
-                        ModelText="Model_1",
-                        ModelA = new ModelInModel() { TextA = "1AA", TextB = "1AB", },
-                        ModelB = new ModelInModel() { TextA = "1BA", TextB = "1BB", },
-                        ModelC = new ModelInModel() { TextA = "1CA", TextB = "1CB", },
-                    },
-                    new Model()
-                    {
-                        ModelText="Model_2",
-                        ModelA = new ModelInModel() { TextA = "2AA", TextB = "2AB", },
-                        ModelB = new ModelInModel() { TextA = "2BA", TextB = "2BB", },
-                        ModelC = new ModelInModel() { TextA = "3CA", TextB = "3CB", },
-                    },
-                    new Model()
-                    {
-                        ModelText="Model_3",
-                        ModelA = new ModelInModel() { TextA = "3AA", TextB = "3AB", },
-                        ModelB = new ModelInModel() { TextA = "2BA", TextB = "2BB", },
-                        ModelC = new ModelInModel() { TextA = "3CA", TextB = "3CB", },
-                    },
-                };
+                    // Write the bytes to the stream
+                    writer.WriteBytes(data);
+
+                    // Store the bytes to the MemoryStream
+                    await writer.StoreAsync();
+
+                    // Not necessary, but do it anyway
+                    await writer.FlushAsync();
+
+                    // Detach from the Memory stream so we don't close it
+                    writer.DetachStream();
+                }
+
+                raStream.Seek(0);
+
+                BitmapImage bitMapImage = new BitmapImage();
+                bitMapImage.SetSource(raStream);
+
+                image.Source = bitMapImage;
             }
         }
-
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-
-    public class Model
-    {
-        public string ModelText { get; set; }
-
-        public ModelInModel ModelA { get; set; }
-
-        public ModelInModel ModelB { get; set; }
-
-        public ModelInModel ModelC { get; set; }
-    }
-
-    public class ModelInModel
-    {
-        public string TextA { get; set; }
-
-        public string TextB { get; set; }
     }
 
     public class PieData
