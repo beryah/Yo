@@ -54,10 +54,20 @@
 
         </Canvas>
 
-        <Grid x:Name="grid" Height="200" Width="200" Margin="850,190,316,378" Background="#FFC6D6A5">
-            <TextBox x:Name="text" Text="20" Height="20" Margin="14,53,37,115"/>
-            <Button Content="Draw" Click="Button_Click" Margin="7,87,0,69" Height="44" Width="80"/>
-            <Button Content="Save" Click="Save_Click" Margin="86,87,0,69" Height="44" Width="80"/>
+        <Grid x:Name="grid" Height="Auto" Width="Auto" Margin="850,190,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFC6D6A5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="text" Text="20" Height="20" Width="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2"/>
+            <Button Content="Draw" Click="Button_Click" Height="40" Width="Auto" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
+            <Button Content="Save" Click="Save_Click" Height="40" Width="Auto" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
+            <Button Content="SetImg" Click="SetImg_Click" Height="40" Width="Auto" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
         </Grid>
 
         <Image HorizontalAlignment="Left" Height="300" Margin="40,140,0,0" VerticalAlignment="Top" Width="300"

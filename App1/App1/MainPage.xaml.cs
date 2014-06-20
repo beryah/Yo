@@ -14,6 +14,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using System.Linq;
 
 // 空白頁項目範本已記錄在 http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -32,16 +33,16 @@ namespace App1
             this.pie.DataContext = data;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             double amt;
 
             if (double.TryParse(this.text.Text, out amt))
             {
+                await Task.Delay(300);
+
                 this.pie.DataContext = new PieData(amt);
             }
-
-            var a = this.grid;
         }
 
         private async void Save_Click(object sender, RoutedEventArgs e)
@@ -66,21 +67,52 @@ namespace App1
 
                     await encoder.FlushAsync();
 
-                    var bitmapImage = new BitmapImage(new Uri(@"C:\Users\Ejun\Pictures\XXX.png"));
-                    //bitmapImage.SetSource(stream);
-
-                    this.img.Source = bitmapImage;
+                    var bitMapImage = new BitmapImage();
+                    stream.Seek(0);
+                    bitMapImage.SetSource(stream);
+                    this.img.Source = bitMapImage;
                 }
             }
-
-            //await this.SetImageFromByteArray(bytes, this.img);
         }
 
-        public async Task SetImageFromByteArray(byte[] data, Windows.UI.Xaml.Controls.Image image)
+        private async void SetImg_Click(object sender, RoutedEventArgs e)
         {
-            using (InMemoryRandomAccessStream raStream = new InMemoryRandomAccessStream())
+            var picker = new FileOpenPicker();
+            picker.FileTypeFilter.Add(".png");
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".bmp");
+            picker.FileTypeFilter.Add(".gif");
+
+            var file = await picker.PickSingleFileAsync();
+            if (file != null)
             {
-                using (DataWriter writer = new DataWriter(raStream))
+                //var image = new BitmapImage(new Uri(file.Path, UriKind.Absolute));
+                //this.img.Source = image;
+
+                using (var stream = await file.OpenReadAsync())
+                {
+                    using (var reader = new DataReader(stream))
+                    {
+                        var bytes = new byte[stream.Size];
+                        await reader.LoadAsync((uint)stream.Size);
+                        reader.ReadBytes(bytes);
+
+                        var a = Convert.ToBase64String(bytes);
+                        var l = a.Length;
+                        var b = Convert.FromBase64String(a);
+
+                        await this.SetImageFromByteArray(b, this.img);
+                    }
+                }
+            }
+        }
+
+        private async Task SetImageFromByteArray(byte[] data, Image image)
+        {
+            using (var raStream = new InMemoryRandomAccessStream())
+            {
+                using (var writer = new DataWriter(raStream))
                 {
                     // Write the bytes to the stream
                     writer.WriteBytes(data);
@@ -97,7 +129,7 @@ namespace App1
 
                 raStream.Seek(0);
 
-                BitmapImage bitMapImage = new BitmapImage();
+                var bitMapImage = new BitmapImage();
                 bitMapImage.SetSource(raStream);
 
                 image.Source = bitMapImage;
