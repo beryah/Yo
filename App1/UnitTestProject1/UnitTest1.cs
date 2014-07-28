@@ -9,11 +9,10 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethod1()
         {
-            var a = new DateTime(1912, 2, 5).GetChineseLunarDate();
-            var b = new DateTime(1912, 2, 24).GetChineseLunarDate();
-            var c = new DateTime(1912, 2, 25).GetChineseLunarDate();
-            var d = new DateTime(1912, 2, 26).GetChineseLunarDate();
-            
+            var cn = new CNDate(new DateTime(2014, 11, 5));
+
+            var a = cn.GetLunarHolDay();
+
             int spsp = 0;
             spsp++;
         }
