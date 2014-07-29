@@ -9,7 +9,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethod1()
         {
-            var cn = new CNDate(new DateTime(2014, 11, 5));
+            var cn = new CNDate(new DateTime(1989, 8, 19));
 
             var a = cn.GetLunarHolDay();
 
