@@ -135,6 +135,26 @@ namespace App1
                 image.Source = bitMapImage;
             }
         }
+
+        public List<LineNode> Line
+        {
+            get
+            {
+                return new List<LineNode>()
+                {
+                    new LineNode(){ Value = 22, Category = "0" },
+                    new LineNode(){ Value = 19, Category = "1" },
+                    new LineNode(){ Value = 20, Category = "2" },
+                    new LineNode(){ Value = 30, Category = "3" },
+                    new LineNode(){ Value = 25, Category = "4" },
+                    new LineNode(){ Value = 15, Category = "5" },
+                    new LineNode(){ Value = 17, Category = "6" },
+                    new LineNode(){ Value = 21, Category = "7" },
+                    new LineNode(){ Value = 12, Category = "8" },
+                    new LineNode(){ Value = 24, Category = "9" },
+                };
+            }
+        }
     }
 
     public class PieData
@@ -162,5 +182,12 @@ namespace App1
         public double Value { get; set; }
 
         public bool IsSelected { get; set; }
+    }
+
+    public class LineNode
+    {
+        public double Value { get; set; }
+
+        public string Category { get; set; }
     }
 }
