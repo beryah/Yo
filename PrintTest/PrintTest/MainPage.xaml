@@ -8,10 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button Content="Button" HorizontalAlignment="Left" Margin="138,89,0,0" VerticalAlignment="Top" Click="Print_Click"/>
-        <Canvas x:Name="printingRoot" HorizontalAlignment="Left" Height="298" Margin="420,227,0,0" VerticalAlignment="Top" Width="398">
-            <Ellipse Width="154" Height="154" Stroke="Black" Fill="Black" VerticalAlignment="Center" HorizontalAlignment="Center" Canvas.Left="144" Canvas.Top="100"/>
-        </Canvas>
-        <TextBlock x:Name="Status" HorizontalAlignment="Left" Margin="848,303,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Button Content="Print" Margin="488,210,0,520" Click="Button_Click"/>
     </Grid>
 </Page>

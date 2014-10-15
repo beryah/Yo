@@ -5,34 +5,16 @@
     xmlns:local="using:PrintTest"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    mc:Ignorable="d">
 
+    <!-- 設定a4大小為794*1123 -->
+    <Page.Width>794</Page.Width>
+    <Page.Height>1123</Page.Height>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Hello 安安" FontSize="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        <Ellipse Grid.Row="1" Grid.Column="0" Fill="Red" Stroke="Red" Width="80" Height="80"/>
-        <Ellipse Grid.Row="1" Grid.Column="1" Fill="Green" Stroke="Green" Width="80" Height="80"/>
-        <Ellipse Grid.Row="1" Grid.Column="2" Fill="Blue" Stroke="Blue" Width="80" Height="80"/>
-
-        <Rectangle Grid.Row="2" Grid.Column="0" Fill="Red" Stroke="Red" Width="80" Height="80"/>
-        <Rectangle Grid.Row="2" Grid.Column="1" Fill="Green" Stroke="Green" Width="80" Height="80"/>
-        <Rectangle Grid.Row="2" Grid.Column="2" Fill="Blue" Stroke="Blue" Width="80" Height="80"/>
-
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/Print_BG.png"/>
+        </Grid.Background>
+        <TextBlock Text="Print Test" FontSize="60" Foreground="Black"/>
     </Grid>
 </Page>
