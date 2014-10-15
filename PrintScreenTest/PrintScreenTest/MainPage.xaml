@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="PrintScreenTest.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PrintScreenTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Button Content="Click" Margin="222,191,0,543" Click="Button_Click"/>
+        <ItemsControl x:Name="PrintScreenArea" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" Height="2000">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Background="LightBlue" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="截圖測試，截圖測試" FontSize="72" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+            <x:Int32>1</x:Int32>
+        </ItemsControl>
+    </Grid>
+</Page>
