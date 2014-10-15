@@ -8,34 +8,44 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button Content="Click" Margin="222,191,0,543" Click="Button_Click"/>
-        <ItemsControl x:Name="PrintScreenArea" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0" Height="2000">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Background="LightBlue" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="截圖測試，截圖測試" FontSize="72" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-            <x:Int32>1</x:Int32>
-        </ItemsControl>
+        <Button Content="Click" Margin="1152,199,0,535" Click="Button_Click"/>
+        <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ItemsControl x:Name="PrintScreenArea" Height="2000" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Background="LightBlue" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="截圖測試，截圖測試" FontSize="50" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+                <x:Int32>1</x:Int32>
+            </ItemsControl>
+        </Viewbox>
     </Grid>
 </Page>
